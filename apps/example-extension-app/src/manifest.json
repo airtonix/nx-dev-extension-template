@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json.schemastore.org/chrome-manifest.json",
+  "manifest_version": 3,
+  "name": "ext-two",
+  "description": "",
+  "version": "0.0.0",
+
+  "icons": {
+    "16": "Assets/icons/16.png",
+    "32": "Assets/icons/32.png",
+    "48": "Assets/icons/48.png",
+    "128": "Assets/icons/128.png"
+  },
+
+  "host_permissions": ["<all_urls>"],
+
+  "background": {
+    "service_worker": "background.js"
+  },
+
+  "options_ui": {
+    "page": "options.html"
+  },
+
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+
+  "action": {
+    "default_icon": {
+      "16": "Assets/icons/16.png",
+      "32": "Assets/icons/32.png",
+      "48": "Assets/icons/48.png",
+      "128": "Assets/icons/128.png"
+    },
+    "default_title": "ext-two",
+    "default_popup": "popup.html",
+    "theme_icons": [
+      {
+        "light": "Assets/icons/16.png",
+        "dark": "Assets/icons/16-dark.png",
+        "size": 16
+      },
+      {
+        "light": "Assets/icons/32.png",
+        "dark": "Assets/icons/32-dark.png",
+        "size": 32
+      },
+      {
+        "light": "Assets/icons/48.png",
+        "dark": "Assets/icons/48-dark.png",
+        "size": 48
+      },
+      {
+        "light": "Assets/icons/128.png",
+        "dark": "Assets/icons/128-dark.png",
+        "size": 128
+      }
+    ]
+  },
+  "permissions": ["storage", "tabs"]
+}

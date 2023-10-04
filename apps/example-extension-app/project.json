@@ -1,0 +1,122 @@
+{
+  "name": "example-extension-app",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/example-extension-app/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "swc",
+        "outputPath": "dist/apps/example-extension-app",
+        "index": "apps/example-extension-app/src/index.html",
+        "baseHref": "/",
+        "main": "apps/example-extension-app/src/noop.ts",
+        "tsConfig": "apps/example-extension-app/tsconfig.app.json",
+        "assets": [
+          "apps/example-extension-app/src/Assets",
+          "apps/example-extension-app/src/favicon.ico",
+          "apps/example-extension-app/src/manifest.json"
+        ],
+        "styles": ["apps/example-extension-app/src/styles.scss"],
+        "additionalEntryPoints": [
+          {
+            "entryName": "background",
+            "entryPath": "apps/example-extension-app/src/App/Background/index.ts"
+          },
+          {
+            "entryName": "popup",
+            "entryPath": "apps/example-extension-app/src/App/Popup/main.tsx"
+          },
+          {
+            "entryName": "options",
+            "entryPath": "apps/example-extension-app/src/App/Options/main.tsx"
+          },
+          {
+            "entryName": "newtab",
+            "entryPath": "apps/example-extension-app/src/App/NewTab/main.tsx"
+          }
+        ],
+        "generateIndexHtml": false,
+        "commonChunk": true,
+        "isolatedConfig": true,
+        "webpackConfig": "apps/example-extension-app/webpack.config.cjs"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/example-extension-app/src/environments/environment.ts",
+              "with": "apps/example-extension-app/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@spaceribs/nx-web-ext:serve",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "example-extension-app:build",
+        "hmr": true,
+        "webExtOptions": {
+          "target": ["chromium"],
+          "chromiumBinary": "/usr/bin/chromium-browser"
+        }
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "example-extension-app:build:development"
+        },
+        "production": {
+          "buildTarget": "example-extension-app:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/example-extension-app/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/example-extension-app/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    },
+    "package": {
+      "executor": "@spaceribs/nx-web-ext:package",
+      "dependsOn": ["build"],
+      "options": {
+        "sourceDir": "dist/apps/example-extension-app",
+        "artifactsDir": "/mnt/Store/Projects/Mine/Github/org/dist/apps"
+      }
+    }
+  },
+  "tags": []
+}
