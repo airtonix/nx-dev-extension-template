@@ -1,0 +1,10 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "release": {
+      "executor": "@theunderscorer/nx-semantic-release:semantic-release"
+    }
+  }
+}

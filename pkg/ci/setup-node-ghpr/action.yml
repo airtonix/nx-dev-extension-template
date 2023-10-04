@@ -1,0 +1,23 @@
+name: Configure publishing to GHPR
+
+description: inserts configuration into your ~/.npmrc to auth with the repos GHPR
+
+inputs:
+  NodeAuthToken:
+    description: 'Auth token for the repos GHPR'
+    required: true
+
+runs:
+  using: 'composite'
+
+  steps:
+    - name: Setup publishing
+      shell: bash
+      env:
+        NODE_AUTH_TOKEN: ${{inputs.NodeAuthToken}}
+      run: |
+        echo """
+        //npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}
+        @airtonix/bee-game:registry=https://npm.pkg.github.com
+        always-auth=true
+        """ >> $HOME/.npmrc

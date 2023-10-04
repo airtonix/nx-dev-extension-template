@@ -1,0 +1,55 @@
+{
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "nx-cloud",
+      "options": {
+        "cacheableOperations": ["build", "lint", "test", "e2e"],
+        "accessToken": "YOUR_NX_CLOUD_TOKEN"
+      }
+    }
+  },
+  "extends": "nx/presets/npm.json",
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "workspaceLayout": {
+    "libsDir": "pkg",
+    "appsDir": "apps",
+    "projectNameAndRootFormat": "derived"
+  },
+  "affected": {
+    "defaultBase": "master"
+  },
+  "generators": {
+    "@nx/react": {
+      "application": {
+        "style": "scss",
+        "linter": "eslint",
+        "bundler": "webpack",
+        "babel": true,
+        "pascaleCaseFiles": true
+      },
+      "component": {
+        "style": "scss",
+        "pascaleCaseFiles": true
+      },
+      "library": {
+        "style": "scss",
+        "linter": "eslint",
+        "pascaleCaseFiles": true,
+        "unitTestRunner": "jest"
+      }
+    }
+  },
+  "targetDefaults": {
+    "lint": {
+      "inputs": [
+        "default",
+        "{workspaceRoot}/.eslintrc.json",
+        "{workspaceRoot}/.eslintignore",
+        "{workspaceRoot}/eslint.config.js"
+      ]
+    },
+    "test": {
+      "inputs": ["default", "^default", "{workspaceRoot}/jest.preset.js"]
+    }
+  }
+}

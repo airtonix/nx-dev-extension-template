@@ -1,0 +1,11 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "ci/setup-node-ghpr",
+  "tags": [],
+  "targets": {
+    "release": {
+      "executor": "@theunderscorer/nx-semantic-release:semantic-release"
+    }
+  }
+}
