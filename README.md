@@ -12,3 +12,17 @@
 - options page
 - popup page
 - new tab page
+
+## Roadmap
+
+- [ ] PR Template
+- [ ] Github Workflows
+  - [ ] PR linting
+  - [ ] Release Automation
+- [ ] Demo Extension
+- [ ] Documentation
+  - [ ] Contributing
+  - [ ] Build Configuration
+  - [ ] UI Architecture
+  - [ ] Browser Targets
+  
