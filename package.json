@@ -67,7 +67,7 @@
     "nano-staged": "^0.8.0",
     "nx": "16.9.0",
     "nx-cloud": "latest",
-    "postcss": "^8.4.24",
+    "postcss": "^8.4.31",
     "prettier": "^2.6.2",
     "react-refresh": "^0.10.0",
     "rooks": "7.14.1",
